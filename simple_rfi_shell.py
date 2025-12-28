@@ -29,6 +29,14 @@ class RFIShell:
     
     def __init__(self, target, param, your_ip=None, your_port=8000, 
                  shell_file=None, method='http', verbose=False):
+        # Colors - define FIRST before any methods that use them
+        self.RED = '\033[91m'
+        self.GREEN = '\033[92m'
+        self.YELLOW = '\033[93m'
+        self.BLUE = '\033[94m'
+        self.RESET = '\033[0m'
+        
+        # Now initialize other attributes
         self.target = self.normalize_url(target)
         self.param = param
         self.your_ip = your_ip or self.detect_tun0_ip()
@@ -39,13 +47,6 @@ class RFIShell:
         self.temp_dir = None
         self.server = None
         self.server_thread = None
-        
-        # Colors
-        self.RED = '\033[91m'
-        self.GREEN = '\033[92m'
-        self.YELLOW = '\033[93m'
-        self.BLUE = '\033[94m'
-        self.RESET = '\033[0m'
     
     def normalize_url(self, url):
         """Add http:// if missing"""
